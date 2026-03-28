@@ -17,4 +17,20 @@ app.get("/matches", async (req, res) => {
   }
 });
 
+// ⭐ NUOVO ENDPOINT PER I MONDIALI
+app.get("/wc-matches", async (req, res) => {
+  try {
+    const response = await fetch("https://api.football-data.org/v4/competitions/WC/matches", {
+      headers: { "X-Auth-Token": process.env.API_KEY }
+    });
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error("Errore nella chiamata ai Mondiali:", error);
+    res.status(500).json({ error: "Errore nel proxy Mondiali" });
+  }
+});
+
 app.listen(PORT, () => console.log(`Proxy attivo su porta ${PORT}`));
