@@ -32,5 +32,8 @@ app.get("/wc-matches", async (req, res) => {
     res.status(500).json({ error: "Errore nel proxy Mondiali" });
   }
 });
+app.get("/ping", (req, res) => {
+    res.send("ok");
+});
 
 app.listen(PORT, () => console.log(`Proxy attivo su porta ${PORT}`));
