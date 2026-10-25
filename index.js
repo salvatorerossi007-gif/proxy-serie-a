@@ -17,8 +17,12 @@ app.get("/matches", async (req, res) => {
       headers: { "X-Auth-Token": process.env.API_KEY }
     });
 
-    const data = await response.json();
-    res.json(data);
+    console.log("STATUS:", response.status);
+console.log("REMAINING:", response.headers.get("X-Requests-Available-Minute"));
+
+const data = await response.json();
+res.json(data);
+
   } catch (error) {
     res.status(500).json({ error: "Errore nel proxy" });
   }
